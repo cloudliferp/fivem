@@ -5,3 +5,5 @@ if os.istarget('windows') and not _OPTIONS['with-asan'] then
 
 	buildoptions '/Zc:threadSafeInit- /EHa /fp:fast'
 end
+
+links { "libmariadb" }

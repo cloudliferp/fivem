@@ -32,6 +32,9 @@
 #if LUA_VERSION_NUM == 504
 #include <lglmlib.hpp>
 #endif
+#if IS_FXSERVER
+#include <mysql_lib.h>
+#endif
 
 extern LUA_INTERNAL_LINKAGE
 {
@@ -795,6 +798,13 @@ static int Lua_Require(lua_State* L)
 	else if (strcmp(name, LUA_GLMLIBNAME) == 0)
 	{
 		luaL_requiref(L, LUA_GLMLIBNAME, luaopen_glm, 1);
+		return 1;
+	}
+#endif
+#if IS_FXSERVER
+	else if (strcmp(name, LUA_MYSQLLIBNAME) == 0)
+	{
+		luaL_requiref(L, LUA_MYSQLLIBNAME, luaopen_mysql, 1);
 		return 1;
 	}
 #endif
